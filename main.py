@@ -10,13 +10,16 @@ def main(stdscr):
     BLUE_AND_YELLOW = curses.color_pair(1)
     GREEN_AND_BLACK = curses.color_pair(2)
 
-    for i in range(100):
-        color = BLUE_AND_YELLOW
-        if i % 2 == 0:
-            color = GREEN_AND_BLACK
+    pad = curses.newpad(100, 100)
+    stdscr.refresh()
 
-        stdscr.addstr(f"Count: {i}", color)
-        stdscr.refresh()
+    for i in range(100):
+        for j in range(26):
+            char = chr(67 + j)
+            pad.addstr(char, GREEN_AND_BLACK)
+
+    for i in range(50):
+        pad.refresh(0, i, 5, 5, 10, 25)
         time.sleep(0.1)
 
     stdscr.getch()
