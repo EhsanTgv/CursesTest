@@ -11,10 +11,16 @@ def main(stdscr):
     BLUE_AND_YELLOW = curses.color_pair(1)
     GREEN_AND_BLACK = curses.color_pair(2)
     ORANGE_AND_WHITE = curses.color_pair(3)
+    stdscr.nodelay(True)
 
     x, y = 0, 0
+    string_x = 0
     while True:
-        key = stdscr.getkey()
+        try:
+            key = stdscr.getkey()
+        except:
+            key = None
+
         if key == 'KEY_LEFT':
             x -= 1
         elif key == 'KEY_RIGHT':
@@ -25,6 +31,8 @@ def main(stdscr):
             y += 1
 
         stdscr.clear()
+        string_x += 1
+        stdscr.addstr(x, string_x // 50, 'Hello World!')
         stdscr.addstr(y, x, "0")
         stdscr.refresh()
 
